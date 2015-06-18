@@ -23,8 +23,8 @@ class JImageView: NSImageView {
   
   override func drawRect(dirtyRect: NSRect)
   {
-    NSColor.blackColor().setFill();
-    NSRectFill(dirtyRect);
+//    NSColor.blackColor().setFill();
+//    NSRectFill(dirtyRect);
     super.drawRect(dirtyRect);
   }
 }

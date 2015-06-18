@@ -19,8 +19,10 @@ class ViewController: NSViewController {
 
     let fileManager = NSFileManager.defaultManager()
     if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.PicturesDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String] {
-      let dir = dirs[0] //documents directory
+      var dir = dirs[0] // pictures directory
+      dir = dir + "/testy"
       readDirectoryContent(dir)
+      displayImage(0)
     }
   }
 
@@ -44,6 +46,24 @@ class ViewController: NSViewController {
       }
     }
   }
-
+  
+  func displayImage(iPos:Int)
+  {
+    if (imagesCollection.count > 0)
+    {
+      var url = NSURL(fileURLWithPath: imagesCollection[iPos])
+      if (NSFileManager().fileExistsAtPath(imagesCollection[iPos]))
+      {
+        if let image = NSImage(byReferencingFile: url!.path!)
+        {
+          println("Image loaded")
+          self.scrollView.setFrameSize(image.size)
+          NSLog("Image size: %dx%d", image.size.width, image.size.height)
+          self.imageView.image = image;
+          imageView.setNeedsDisplay()
+        }
+      }
+    }
+  }
 }
 
